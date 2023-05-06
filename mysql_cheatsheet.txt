@@ -1,0 +1,114 @@
+Command of Mysql databases
+
+
+show databases;
+
+
+use databases;
+
+create database student;
+
+
+drop database <database name>;	
+
+select database();
+
+
+
+create table employee
+    -> (
+    -> name varchar(45),
+    -> class int,
+    -> roll_no int,
+    -> designation varchar(44)
+    -> );
+
+show tables;
+
+desc <tablename>;
+
+show columns from <tablename>;
+
+insert into table_name (Column1,column2,column3...) Values ( value1,value2,...);
+
+select * from table_name;
+
+not null:
+for example:  
+create table table_name(name varchar(44) not null);
+
+
+alter table table_name 
+drop column column_name;
+
+alter table students add school varchar(44);
+
+Primary Key:
+create table <table_name>
+(
+id int not null,
+name varchar(45),
+PRIMARY KEY (id) );
+
+for auto increment
+id int not null auto_incremement
+
+For update:
+Update students set age=23 where name='ramesh';
+
+For delete:
+delete from students where id=2;
+
+select max(age) from students;
+select min(age) from students;
+select sum(age) from students;
+select count(age) from students;
+select avg(age) from students;
+
+select age from students order by age;
+
+select distinct column1,column2,...From table_name;  
+select distinct id,fname from students;
+
+
+
+Group by:
+Used to group the result set (used with aggregate functions:
+count,max,min,sum,avg 
+
+select count(id),fname,lname from students group by lname;
+
+select count(id),fname,lname from students group by lname,order by lname desc;
+
+
+MariaDB [hospital]> insert into hospital
+    -> (name,dob,dotime,dat)
+    -> values ('bishal','2058-03-17','05-45-55','2001-07-01 05-45-55'
+    -> );
+
+
+What is foreign key?
+A foreign key is a key used to link two tables together.
+A foreign key is a field (or collection of fields) in one table that refers 
+to the primary key in another tables.
+
+For example:
+create table customers(cid int not null auto_increment primary key, cname varchar(55), email varchar(100));
+create table orders(oid int not null auto_increment primary key, orderdate date, cid int, foreign key(cid) references customers(cid));
+
+select * from customers,orders;//order matter
+
+Inner Join:
+select * from customers, orders where customers.cid=orders.cid order by orderdate;
+
+select * from customers join orders customers.cid=orders.cid;
+
+select customers.cid,cname,email from customers join orders on customers.cid=ordres.cid;
+
+left join:
+select customers.cid,cname,email from customers left join orders on customers.cid=orders.cid;
+
+right join:
+select customes.cid,cname,email from customers right join orders on customers.cid=orders.cid;
+
+
